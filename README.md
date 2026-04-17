@@ -1,10 +1,12 @@
 ## Project Description
 
-An evil AI has taken over… and kidnapped Branko.
+You thought it was over.
 
-Your only chance to save him (and earn your certificate) is to defeat the AI in a game of Rock, Paper, Scissors.
+After defeating the AI in the Guessing Game, peace returned… briefly.
 
-But be careful — this AI feeds on bad code, messy logic, and user input errors.
+Now the AI is back — stronger, smarter, and far more dangerous.
+
+And this time… it has kidnapped Branko.
 
 ## How to Run
 - Create an index.html file
@@ -15,6 +17,25 @@ But be careful — this AI feeds on bad code, messy logic, and user input errors
 ```bash
 game();
 ```
+
+## 🧨 The Story
+
+It started with a simple guessing game.
+
+You won.
+
+The AI lost.
+
+Or so you thought.
+
+“You may have defeated me once…
+but I have evolved.”
+
+The system flickers. The console opens.
+
+“I have taken Branko.
+If you want him back… you will face me again.
+This time — in Rock, Paper, Scissors.”
 
 ## Technologies Used
 <p align="left">
