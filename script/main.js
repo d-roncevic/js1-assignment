@@ -1,19 +1,21 @@
-/*
+
+
+/*─────────────────────────────────────────────────────────────
 The FIRST FUNCTION
 The function gives us the options to choose for the game
 and randomly picks any option for the computer play
-*/
+─────────────────────────────────────────────────────────────*/
 function computerPlay() {
   const options = ["Rock", "Paper", "Scissors"]; // We put them in an array to be able to reference them easily by index
   const randomIndex = Math.floor(Math.random() * 3); // gives us the random numbers from 0 to 3
   return options[randomIndex]; // returns which option was picked
 }
 
-/*
+/*─────────────────────────────────────────────────────────────
 THE SECOND FUNCTION
 The function turns both the player and computer option into lowercase
 It also checks for the winner between the player and the computer
-*/
+─────────────────────────────────────────────────────────────*/
 
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase(); // Turns the string to lowercase e.g "ROCK" to "rock"
@@ -25,25 +27,30 @@ function playRound(playerSelection, computerSelection) {
   }
 
   // Putting together all the ways the player can win the game
-  if (
+  const playerWins= 
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "scissors" && computerSelection === "paper")
-  ) {
+
+  if (playerWins){
     return `You Win! ${playerSelection} beats ${computerSelection}! 🏆🥳`;
+
   }
 
   // If the play is not a draw and not a win then it's a lose
   return `Ooops!! You Lose! ${computerSelection} beats ${playerSelection}! 💀`;
 }
 
-/*
+/*─────────────────────────────────────────────────────────────
 THE MAIN FUNCTION OF THE GAME
 The function tracks the play and the rounds
 Welcomes the user into the game by displaying the welcoming message
 Loops the game for the 5 rounds it takes
 Validates the player (user) input
-*/
+
+Handling the edge cases when the player clicks cancel,Ok without 
+typing anything and when they type an invalid choice.
+─────────────────────────────────────────────────────────────*/
 
 function game() {
   let playerScore = 0; // this tracks player (user) wins
@@ -71,37 +78,77 @@ function game() {
 
     // The loop keeps asking the player until they provide a valid answer in the options
     let playerSelection = "";
-    while (
-      playerSelection !== "rock" &&
-      playerSelection !== "paper" &&
-      playerSelection !== "scissors"
-    ) {
-      playerSelection = prompt(
-        "Your move! Type Rock, Paper, or Scissors:",
-      ).toLowerCase();
+    while (true) {
+      const rawInput = prompt(
+        `Round ${i+1} of ${totalRounds}\n` +
+        `Score ➡️  You: ${playerScore} | Evil AI: ${computerScore} | Draws: ${draws}\n\n` +
+        `Your move! Type Rock, Paper, or Scissors:`
+      );
 
-      // checks the validity of the player input
+      // // CASE 1: The display when the player clicks cancel  (rawInput === null)
+      if (rawInput === null) {
+        // Ask  the player if they really want to quit the game
+        const wantsToQuit = confirm(
+          "⚠️ Do you want to CANCEL the game?\n\n" +
+          "Press OK to forfeit — the Evil AI wins.\n" +
+          "Press Cancel to go back and keep playing."
+        );
 
-      if (
-        playerSelection !== "rock" &&
-        playerSelection !== "paper" &&
-        playerSelection !== "scissors"
-      ) {
-        console.log("❌ Invalid choice! Please type Rock, Paper, or Scissors.");
+        if (wantsToQuit) {
+          // When the Player confirms they want to quit, the game is forfeited
+          console.log("\n🚪 You forfeited the game!");
+          console.log("💀 The Evil AI wins by default... Mwahahaha!");
+          console.log("===========================================");
+          return; // exiting the game() function entirely
+        } else {
+          // Player changed their mind loop back to the prompt
+          console.log("↩️  Returning to the game...");
+          continue; // restarting the while loop showing the  prompt again
+        }
       }
+
+      const trimmed = rawInput.trim();
+
+      // CASE 2: The player clicks OK without typing anything
+      if (trimmed === "") {
+        const emptyMsg = "⚠️ You did not enter anything!\nPlease type Rock, Paper, or Scissors.";
+        alert(emptyMsg);
+        console.log("⚠️  You did not enter anything! Please type Rock, Paper, or Scissors.");
+        continue; // restart the while loop showing the  prompt again
+      }
+
+      const lowerInput = trimmed.toLowerCase();
+
+      // CASE 3: The player  types something invalid 
+      if (
+        lowerInput !== "rock" &&
+        lowerInput !== "paper" &&
+        lowerInput !== "scissors"
+      ) {
+        alert(`❌ "${trimmed}" is not a valid choice!\nPlease type Rock, Paper, or Scissors.`);
+        console.log(`❌ "${trimmed}" is not a valid choice! Please type Rock, Paper, or Scissors.`);
+        continue; // restarting the while loop to show prompt again
+      }
+
+      // CASE 4: The player types a valid input
+      playerSelection = trimmed;
+      break;
     }
 
     const computerSelection = computerPlay(); // calling the first function so that the computer can make it's move
     // console.log(`You chose: ${playerSelection}`);
     // console.log(`Computer chose: ${computerSelection}`);
 
-    const result = playRound(playerSelection, computerSelection); // calling the second function to check for the winner of this round
-    // console.log(result); // displaying the result to the user from the second function
+    // playRound returns "outcome|message" — split on the pipe
+    const resultRaw = playRound(playerSelection, computerSelection);
+    const [outcome, resultMessage] = resultRaw.split("|");
 
-    // Updating the score based on who won on the round
-    if (result.includes("You Win")) {
+    console.log(resultMessage);
+
+    // ── Update scores based on outcome ──
+    if (outcome === "win") {
       playerScore++;
-    } else if (result.includes("You Lose")) {
+    } else if (outcome === "lose") {
       computerScore++;
     } else {
       draws++;
@@ -151,3 +198,16 @@ function game() {
   }
   console.log("===========================================");
 }
+
+/* ─────────────────────────────────────────────────────────────
+   START THE GAME
+   The player must open the browser console (F12 → Console)
+   and type  game()  then press Enter to begin.
+   The game does NOT auto-run on page load, giving the player
+   a chance to open the console first.
+   ───────────────────────────────────────────────────────────── */
+console.log("===========================================");
+console.log("  ⚔️  ROCK, PAPER, SCISSORS is ready!  ⚔️  ");
+console.log("  Type  game()  and press Enter to begin.  ");
+console.log("===========================================");
+

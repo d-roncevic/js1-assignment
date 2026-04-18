@@ -4,9 +4,11 @@ You thought it was over.
 
 After defeating the AI in the Guessing Game, peace returned… briefly.
 
-Now the AI is back — stronger, smarter, and far more dangerous.
+Now the AI is back - stronger, smarter, and far more dangerous.
 
 And this time… it has kidnapped Branko.
+
+Try to save Branko [here.](https://d-roncevic.github.io/js1-assignment/)
 
 ## How to Run
 - Create an index.html file
@@ -35,7 +37,7 @@ The system flickers. The console opens.
 
 “I have taken Branko.
 If you want him back… you will face me again.
-This time — in Rock, Paper, Scissors.”
+This time - in Rock, Paper, Scissors.”
 
 ## Technologies Used
 <p align="left">
