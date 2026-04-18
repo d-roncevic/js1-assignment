@@ -136,29 +136,18 @@ function game() {
     }
 
     const computerSelection = computerPlay(); // calling the first function so that the computer can make it's move
-    // console.log(`You chose: ${playerSelection}`);
-    // console.log(`Computer chose: ${computerSelection}`);
 
     // playRound returns "outcome|message" — split on the pipe
     const resultRaw = playRound(playerSelection, computerSelection);
-    const [outcome, resultMessage] = resultRaw.split("|");
-
-    console.log(resultMessage);
-
+ 
     // ── Update scores based on outcome ──
-    if (outcome === "win") {
+    if (resultRaw.includes("Win")) {
       playerScore++;
-    } else if (outcome === "lose") {
+    } else if (resultRaw.includes("Lose")) {
       computerScore++;
     } else {
       draws++;
     }
-
-    // Displaying the score board to the player(user)
-
-    // console.log(
-    //   `Score ➡️ You: ${playerScore} | Computer: ${computerScore} | Draws: ${draws}\n`,
-    // );
   }
 
   // After all 5 rounds of the game, announce the overall winner
