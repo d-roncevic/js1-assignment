@@ -64,23 +64,21 @@ function game() {
   console.log("Win 3 out of the 5 rounds to defeat it!");
   console.log("===========================================\n");
 
-  for (let round = 1; round < totalRounds; round++) {   // loops exactly 5 times for the game rounds
-    console.log(`--- Round ${round} of ${totalRounds} ---`);
+  for (let i = 0; i < totalRounds; i++) {   // loops exactly 5 times for the game rounds
+    console.log(`--- Round ${i + 1} of ${totalRounds} ---`);
 
     // The loop keeps asking the player until they provide a valid answer in the options
     let playerSelection = "";
     while (true) {
-
-      
       const rawInput = prompt(
-        `Round ${round} of ${totalRounds}\n` +
+        `Round ${i+1} of ${totalRounds}\n` +
         `Score ➡️  You: ${playerScore} | Evil AI: ${computerScore} | Draws: ${draws}\n\n` +
         `Your move! Type Rock, Paper, or Scissors:`
       );
 
       // // CASE 1: The display when the player clicks cancel  (rawInput === null)
       if (rawInput === null) {
-        // Ask  the player if they really want to quit
+        // Ask  the player if they really want to quit the game
         const wantsToQuit = confirm(
           "⚠️ Do you want to CANCEL the game?\n\n" +
           "Press OK to forfeit — the Evil AI wins.\n" +
@@ -92,11 +90,11 @@ function game() {
           console.log("\n🚪 You forfeited the game!");
           console.log("💀 The Evil AI wins by default... Mwahahaha!");
           console.log("===========================================");
-          return; // exit the game() function entirely
+          return; // exiting the game() function entirely
         } else {
-          // Player changed their mind → loop back to the prompt
+          // Player changed their mind loop back to the prompt
           console.log("↩️  Returning to the game...");
-          continue; // restart the while loop — showing the  prompt again
+          continue; // restarting the while loop showing the  prompt again
         }
       }
 
@@ -107,7 +105,7 @@ function game() {
         const emptyMsg = "⚠️ You did not enter anything!\nPlease type Rock, Paper, or Scissors.";
         alert(emptyMsg);
         console.log("⚠️  You did not enter anything! Please type Rock, Paper, or Scissors.");
-        continue; // restart the while loop — show prompt again
+        continue; // restart the while loop showing the  prompt again
       }
 
       const lowerInput = trimmed.toLowerCase();
@@ -120,7 +118,7 @@ function game() {
       ) {
         alert(`❌ "${trimmed}" is not a valid choice!\nPlease type Rock, Paper, or Scissors.`);
         console.log(`❌ "${trimmed}" is not a valid choice! Please type Rock, Paper, or Scissors.`);
-        continue; // restart the while loop to show prompt again
+        continue; // restarting the while loop to show prompt again
       }
 
       // CASE 4: The player types a valid input
