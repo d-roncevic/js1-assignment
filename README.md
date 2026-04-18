@@ -8,6 +8,8 @@ Now the AI is back - stronger, smarter, and far more dangerous.
 
 And this time… it has kidnapped Branko.
 
+Try to save Branko [here.](https://d-roncevic.github.io/js1-assignment/)
+
 ## How to Run
 - Create an index.html file
 - Link your script.js
