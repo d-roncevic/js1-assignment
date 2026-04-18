@@ -8,7 +8,7 @@ and randomly picks any option for the computer play
 function computerPlay() {
   const options = ["Rock", "Paper", "Scissors"]; // We put them in an array to be able to reference them easily by index
   const randomIndex = Math.floor(Math.random() * 3); // gives us the random numbers from 0 to 3
-  return options[randomIndex]; // returns which option was picked 
+  return options[randomIndex]; // returns which option was picked
 }
 
 /*─────────────────────────────────────────────────────────────
@@ -19,9 +19,9 @@ It also checks for the winner between the player and the computer
 
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase(); // Turns the string to lowercase e.g "ROCK" to "rock"
-  computerSelection = computerSelection.toLowerCase(); // making it consistent with the player options 
+  computerSelection = computerSelection.toLowerCase(); // making it consistent with the player options
 
-  // Checks if the play is a draw 
+  // Checks if the play is a draw
   if (playerSelection === computerSelection) {
     return `It's a draw! You both chose ${computerSelection}.`;
   }
@@ -53,18 +53,27 @@ typing anything and when they type an invalid choice.
 ─────────────────────────────────────────────────────────────*/
 
 function game() {
-  let playerScore = 0;    // this tracks player (user) wins
-  let computerScore = 0;  // tracks computer's wins
-  let draws = 0;          // tracks draws
-  const totalRounds = 5;  // this is the number of rounds for the game
+  let playerScore = 0; // this tracks player (user) wins
+  let computerScore = 0; // tracks computer's wins
+  let draws = 0; // tracks draws
+  const totalRounds = 5; // this is the number of rounds for the game
 
-  console.log("===========================================");
-  console.log(" ⚔️ WELCOME TO ROCK, PAPER, SCISSORS! ⚔️");
-  console.log("The evil AI has challenged you to a duel!");
-  console.log("Win 3 out of the 5 rounds to defeat it!");
-  console.log("===========================================\n");
+  alert(
+    `📡 SYSTEM BREACH DETECTED...
 
-  for (let i = 0; i < totalRounds; i++) {   // loops exactly 5 times for the game rounds
+  You recognize this presence...
+  🤖 AI: "You thought you defeated me in the Guessing Game..."
+  🤖 AI: "But I have evolved."
+  ⚠️ ALERT: Branko has been kidnapped!
+  🤖 AI: "If you want your certificate... and Branko back..."
+  🤖 AI: "Defeat me in Rock, Paper, Scissors."
+  Press OK if you dare...`,
+  );
+
+  console.log("⚔️ The battle begins...\n");
+
+  for (let i = 0; i < totalRounds; i++) {
+    // loops exactly 5 times for the game rounds
     console.log(`--- Round ${i + 1} of ${totalRounds} ---`);
 
     // The loop keeps asking the player until they provide a valid answer in the options
@@ -127,8 +136,8 @@ function game() {
     }
 
     const computerSelection = computerPlay(); // calling the first function so that the computer can make it's move
-    console.log(`You chose: ${playerSelection}`);
-    console.log(`Computer chose: ${computerSelection}`);
+    // console.log(`You chose: ${playerSelection}`);
+    // console.log(`Computer chose: ${computerSelection}`);
 
     // playRound returns "outcome|message" — split on the pipe
     const resultRaw = playRound(playerSelection, computerSelection);
@@ -147,20 +156,45 @@ function game() {
 
     // Displaying the score board to the player(user)
 
-    console.log(`Score ➡️ You: ${playerScore} | Computer: ${computerScore} | Draws: ${draws}\n`);
+    // console.log(
+    //   `Score ➡️ You: ${playerScore} | Computer: ${computerScore} | Draws: ${draws}\n`,
+    // );
   }
 
   // After all 5 rounds of the game, announce the overall winner
   console.log("===========================================");
   console.log(" 🎮👋 GAME OVER! Here are the final results:");
-  console.log(`You: ${playerScore} | Computer: ${computerScore} | Draws: ${draws}`);
+  console.log(
+    `You: ${playerScore} | Computer: ${computerScore} | Draws: ${draws}`,
+  );
 
   if (playerScore > computerScore) {
+    alert(
+      `
+      🤖 AI: "No... defeated... again..."
+
+      🔓 Branko has been freed!
+      🎓 Certificate unlocked!
+
+      🏆 YOU WIN!`,
+    );
     console.log(" 🏆🥳 YOU WIN! The evil AI has been defeated!");
   } else if (computerScore > playerScore) {
-    console.log(" 💀 Ooops!! YOU LOSE! The evil AI dominates once more... Mwahahaha!");
+    alert(
+      `
+      🤖 AI: "You never stood a chance."      
+      🔒 Branko remains captured...
+      ❌ Certificate denied.
+
+      💀 YOU LOSE!`,
+    );
   } else {
-    console.log("⚖️🤝 It's a tie! The evil AI lives to fight another day...");
+    alert(
+      `
+      🤖 AI: "A tie... I will return stronger."
+
+      ⚠️ Branko is still in danger...`,
+    );
   }
   console.log("===========================================");
 }
